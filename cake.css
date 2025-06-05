@@ -1,0 +1,298 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic);
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ee9ca7, #ffdde1);
+    background-size: 200% 200%;
+    animation: gradient 10s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: background-color 2s ease;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#cake {
+    display: block;
+    position: relative;
+    margin: -10em auto 0 auto;
+    width: min(200px, 80vw);
+    height: auto;
+}
+
+.velas {
+    background: #ffffff;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -2.5px;
+    margin-top: -8.33333333px;
+    width: 5px;
+    height: 35px;
+    transform: translateY(-300px);
+    backface-visibility: hidden;
+    animation: in 500ms 6s ease-out forwards;
+    cursor: pointer;
+    z-index: 1000;
+    transform-origin: center bottom;
+    transition: transform 0.3s ease;
+}
+
+.velas:after,
+.velas:before {
+    background: rgba(255, 0, 0, 0.4);
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2.22222222px;
+}
+
+.velas:after {
+    top: 25%;
+    left: 0;
+}
+
+.velas:before {
+    top: 45%;
+    left: 0;
+}
+
+.fuego {
+    border-radius: 100%;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -2.6px;
+    width: 6.66666667px;
+    height: 18px;
+}
+
+.fuego:nth-child(1) { animation: fuego 2s 6.5s infinite; }
+.fuego:nth-child(2) { animation: fuego 1.5s 6.5s infinite; }
+.fuego:nth-child(3) { animation: fuego 1s 6.5s infinite; }
+.fuego:nth-child(4) { animation: fuego 0.5s 6.5s infinite; }
+.fuego:nth-child(5) { animation: fuego 0.2s 6.5s infinite; }
+
+@keyframes fuego {
+    0%, 100% {
+        background: rgba(254, 248, 97, 0.5);
+        box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        background: rgba(255, 50, 0, 0.1);
+        box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+        transform: translateY(-20px) scale(0);
+    }
+}
+
+@keyframes in {
+    to {
+        transform: translateY(0);
+    }
+}
+
+.text {
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    z-index: 1001;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.text h1 {
+    font-size: clamp(0.9rem, 2.5vw, 1.3em);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+    white-space: pre-line;
+    opacity: 0.9;
+}
+
+.message-container {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    pointer-events: none;
+}
+
+.message-left, .message-right {
+    width: min(400px, 40%);
+    padding: 25px;
+    color: #ffffff;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.8em);
+    line-height: 1.6;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1.5s ease;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.message-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.message-left.show, .message-right.show {
+    opacity: 1;
+    transform: translateY(0);
+    animation: messageFloat 4s ease-in-out infinite, glow 2s infinite;
+}
+
+.dim-background {
+    background-color: #000 !important;
+    animation: fadeToBlack 2s forwards !important;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(255, 255, 255, 0.4);
+    }
+}
+
+@keyframes messageFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.velas:hover {
+    transform: scale(1.1) translateY(-300px);
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes typing {
+    from { 
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-left span, .message-right span {
+    display: inline-block;
+    opacity: 0;
+    white-space: pre-wrap;
+}
+
+.message-left.show span, .message-right.show span {
+    animation: typing 0.05s ease-in-out forwards;
+}
+
+@keyframes fadeToBlack {
+    0% {
+        background: linear-gradient(45deg, #ee9ca7, #ffdde1);
+    }
+    100% {
+        background: #000;
+    }
+}
+
+@keyframes starryNight {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.night-dots {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 1%);
+    background-size: 50px 50px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    animation: starryNight 3s forwards;
+    z-index: 1000;
+}
+
+@media screen and (max-width: 768px) {
+    .message-left, .message-right {
+        width: 85%;
+        margin: 10px;
+        font-size: clamp(1rem, 4vw, 1.6em);
+    }
+
+    .message-container {
+        flex-direction: column;
+        padding-bottom: 80px;
+    }
+
+    .text {
+        bottom: 15px;
+        max-width: 300px;
+    }
+
+    .text h1 {
+        font-size: clamp(0.8rem, 2.2vw, 1.1em);
+    }
+}
